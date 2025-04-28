@@ -15,14 +15,14 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Praveeen1996/Youtube-clone-app.git'
+                git branch: 'main', url: 'https://github.com/Praveeen1996/Banking-Application.git'
             }
         }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Youtube \
-                    -Dsonar.projectKey=Youtube'''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Bank \
+                    -Dsonar.projectKey=Bank'''
                 }
             }
         }
@@ -48,16 +48,16 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t youtube ."
-                       sh "docker tag youtube praveenhema/youtube:latest "
-                       sh "docker push praveenhema/youtube:latest"
+                       sh "docker build -t Bank ."
+                       sh "docker tag youtube praveenhema/Bank:latest "
+                       sh "docker push praveenhema/Bank:latest"
                     }
                 }
             }
         }
         stage("deploy_docker"){
             steps{
-                sh "docker run -d --name youtube -p 3000:3000 praveenhema/youtube:latest"
+                sh "docker run -d --name Bank -p 3000:3000 praveenhema/Bank:latest"
             }
         }
     }
