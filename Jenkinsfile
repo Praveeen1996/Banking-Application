@@ -21,8 +21,8 @@ pipeline{
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Bank \
-                    -Dsonar.projectKey=Bank'''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bank \
+                    -Dsonar.projectKey=bank'''
                 }
             }
         }
@@ -48,16 +48,16 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t Bank ."
-                       sh "docker tag youtube praveenhema/Bank:latest "
-                       sh "docker push praveenhema/Bank:latest"
+                       sh "docker build -t bank ."
+                       sh "docker tag youtube praveenhema/bank:latest "
+                       sh "docker push praveenhema/bank:latest"
                     }
                 }
             }
         }
         stage("deploy_docker"){
             steps{
-                sh "docker run -d --name Bank -p 3000:3000 praveenhema/Bank:latest"
+                sh "docker run -d --name bank -p 3000:3000 praveenhema/bank:latest"
             }
         }
     }
