@@ -15,14 +15,14 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Praveeen1996/Banking-Application.git'
+                git branch: 'main', url: 'https://github.com/Praveeen1996/New-Update-Application.git'
             }
         }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bank \
-                    -Dsonar.projectKey=bank'''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=newupdate \
+                    -Dsonar.projectKey=newupdate'''
                 }
             }
         }
@@ -48,16 +48,16 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t bank ."
-                       sh "docker tag youtube praveenhema/bank:latest "
-                       sh "docker push praveenhema/bank:latest"
+                       sh "docker build -t newapplication ."
+                       sh "docker tag youtube praveenhema/newapplication:latest "
+                       sh "docker push praveenhema/newapplication:latest"
                     }
                 }
             }
         }
         stage("deploy_docker"){
             steps{
-                sh "docker run -d --name bank -p 3000:3000 praveenhema/bank:latest"
+                sh "docker run -d --name newapplication -p 3000:3000 praveenhema/newapplication:latest"
             }
         }
     }
