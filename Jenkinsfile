@@ -49,16 +49,16 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t newapplication ."
-                       sh "docker tag youtube praveenhema/newapplication:latest "
-                       sh "docker push praveenhema/newapplication:latest"
+                       sh "docker build -t newupdate ."
+                       sh "docker tag youtube praveenhema/newupdate:latest "
+                       sh "docker push praveenhema/newupdate:latest"
                     }
                 }
             }
         }
         stage("deploy_docker"){
             steps{
-                sh "docker run -d --name newapplication -p 3000:3000 praveenhema/newapplication:latest"
+                sh "docker run -d --name newupadte -p 3000:3000 praveenhema/newupdate:latest"
             }
         }
     }
