@@ -23,7 +23,6 @@ pipeline{
                 withSonarQubeEnv('sonar-server') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=newupgrade \
                     -Dsonar.projectKey=newupgrade'''
-                    sha256:94ccf926cab370e5f0bab44c5db75389fcb8ce3b3ce1d9f1883a42a326b858b6
                 }
             }
         }
