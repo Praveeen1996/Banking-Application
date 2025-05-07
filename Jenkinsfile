@@ -15,14 +15,14 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Praveeen1996/New-Update-Application.git'
+                git branch: 'main', url: 'https://github.com/Praveeen1996/newupgrade.git'
             }
         }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=newupdate \
-                    -Dsonar.projectKey=newupdate'''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=newupgrade \
+                    -Dsonar.projectKey=newupgrade'''
                     sha256:94ccf926cab370e5f0bab44c5db75389fcb8ce3b3ce1d9f1883a42a326b858b6
                 }
             }
@@ -49,16 +49,16 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t newupdate ."
-                       sh "docker tag youtube praveenhema/newupdate:latest "
-                       sh "docker push praveenhema/newupdate:latest"
+                       sh "docker build -t newupgrade ."
+                       sh "docker tag youtube praveenhema/newupgrade:latest "
+                       sh "docker push praveenhema/newupgrade:latest"
                     }
                 }
             }
         }
         stage("deploy_docker"){
             steps{
-                sh "docker run -d --name newupadte -p 3000:3000 praveenhema/newupdate:latest"
+                sh "docker run -d --name newupgrade -p 3000:3000 praveenhema/newupgrade:latest"
             }
         }
     }
