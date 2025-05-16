@@ -16,7 +16,7 @@ spec:
         - name: banking-application
           image: praveenhema/newupgrde:latest
           ports:
-            - containerPort: 3000  # Your Node.js application should listen on port 3000
+            - containerPort: 8080  # Your Node.js application should listen on port 3000
 
 ---
 
@@ -30,5 +30,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80  # You can use port 80 here for HTTP traffic
-      targetPort: 3000  # This should match the port your Node.js application is running on (3000)
-  type: LoadBalancer
+      targetPort: 8080  # This should match the port your Node.js application is running on (3000)
+  type: NodePort
