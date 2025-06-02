@@ -1,8 +1,8 @@
 pipeline{
     agent any
     tools {
-  jdk 'jdk17'
-  nodejs 'nodejs'
+  jdk 'jdk19'
+  nodejs 'nodejs version 19'
 }
     environment {
         SCANNER_HOME=tool 'sonar-scanner'
@@ -61,4 +61,17 @@ pipeline{
             }
         }
     }
+}
+stage('Deploy Container') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Deploying Docker container...'
+                sh '''
+                    docker rm -f ${praveenhema} || true
+                    docker run -d --banking-appliction ${praveengema} -p 3000:3000 ${REGISTRY}/${praveenhema}:${banking-application}
+                '''
+            }
+        }
 }
