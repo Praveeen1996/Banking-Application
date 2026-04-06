@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: banking-application
+  name: bankingapplication
 spec:
-  replicas: 5
+  replicas: 7
   selector:
     matchLabels:
-      app: banking-application
+      app: bankingapplication
   template:
     metadata:
       labels:
-        app: newsecurity 
+        app: securitypatch 
     spec:
       containers:
-        - name: newupdate
-          image: praveenhema/newupgrde:latest
+        - name: securitypatch
+          image: praveenhema/securitypatch:latest
           ports:
             - containerPort: 8081  # Your Node.js application should listen on port 3000
 
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: newupadte-service
+  name: securitypatch-service
 spec:
   selector:
-    app: newupdate
+    app: securitypatch
   ports:
     - protocol: TCP
       port: 80  # You can use port 80 here for HTTP traffic
