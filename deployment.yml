@@ -16,7 +16,7 @@ spec:
         - name: securitypatch
           image: praveenhema/securitypatch:latest
           ports:
-            - containerPort: 8081  # Your Node.js application should listen on port 3000
+            - containerPort: 3000  # Your Node.js application should listen on port 3000
 
 ---
 
