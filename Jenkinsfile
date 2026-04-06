@@ -15,14 +15,14 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Praveeen1996/newupgrade.git'
+                git branch: 'main', url: 'https://github.com/Praveeen1996/bankingapplication.git'
             }
         }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=newupgrade \
-                    -Dsonar.projectKey=newupgrade'''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=securitypatch \
+                    -Dsonar.projectKey=securitypatch'''
                 }
             }
         }
@@ -48,16 +48,16 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t newupgrade ."
-                       sh "docker tag youtube praveenhema/newupgrade:latest "
-                       sh "docker push praveenhema/newupgrade:latest"
+                       sh "docker build -t securitypatch ."
+                       sh "docker tag youtube praveenhema/securitypatch:latest "
+                       sh "docker push praveenhema/securitypatch:latest"
                     }
                 }
             }
         }
         stage("deploy_docker"){
             steps{
-                sh "docker run -d --name newupgrade -p 3000:3000 praveenhema/newupgrade:latest"
+                sh "docker run -d --name securitypatch -p 3000:3000 praveenhema/securitypatch:latest"
             }
         }
     }
@@ -70,7 +70,7 @@ stage('Deploy Container') {
                 echo 'Deploying Docker container...'
                 sh '''
                     docker rm -f ${praveenhema} || true
-                    docker run -d --banking-appliction ${praveengema} -p 3000:3000 ${REGISTRY}/${praveenhema}:${banking-application}
+                    docker run -d --bankingappliction ${praveengema} -p 3000:3000 ${REGISTRY}/${praveenhema}:${bankingapplication}
                 '''
             }
         }
