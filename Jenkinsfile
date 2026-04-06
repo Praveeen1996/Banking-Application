@@ -49,7 +49,7 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build -t securitypatch ."
-                       sh "docker tag youtube praveenhema/securitypatch:latest "
+                       sh "docker tag bankingapplication praveenhema/securitypatch:latest "
                        sh "docker push praveenhema/securitypatch:latest"
                     }
                 }
