@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:18
+FROM node:21
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Expose the port that the app will run on (adjust if needed)
-EXPOSE 8080
+EXPOSE 8082
 
 # Define the command to start the app
 CMD ["npm", "start"]
